@@ -1,0 +1,54 @@
+.NewGoodFormContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    
+}
+.NewGoodForm {
+    padding: 20px;
+    background: linear-gradient(30deg, darkseagreen, darkcyan);
+    box-shadow: 0 0 1000px 1000px rgba(0,0,0,0.5);
+    border: 2px solid #000;
+    
+}
+.FormFieldNameMessage {
+    color: red;
+}
+.nameFieldValue {
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid #000;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.priceFieldValue {
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid #000;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.urlFieldValue {
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid #000;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.leftFieldValue {
+    padding: 5px;
+    font-size: 18px;
+    border: 2px solid #000;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.FormField {
+    display: flex;
+    align-items: center;
+}

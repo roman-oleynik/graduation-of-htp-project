@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+* {
+    font-family: 'Rubik', sans-serif;
+}
+.selected {
+    background: linear-gradient(30deg, darkseagreen, darkcyan);
+}
+td {
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 5px;
+}
+img {
+    height: 80px;
+}
+
+.AppContainer {
+    display: flex;
+}
+.ProductsListAndButton {
+    margin-right: 40px;
+}
+.CardAndFormBlock {
+    display: flex;
+    flex-direction: column;
+}
+.SortInc {
+    background: #0f0;
+}
+.SortDec {
+    background: #f00;
+}
+
+
