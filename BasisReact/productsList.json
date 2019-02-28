@@ -1,40 +1,22 @@
 {
   "array": [
     {
-      "name": "apple",
-      "key": 9824,
-      "id": 9824,
-      "code": 9824,
-      "price": "100",
-      "url": "img/apple.jpg",
-      "left": "1000"
+      "name": "cat",
+      "key": 2155,
+      "id": 2155,
+      "code": 2155,
+      "price": "90",
+      "url": "img/cat.jpg",
+      "left": "90"
     },
     {
-      "name": "pear",
-      "key": 7125,
-      "id": 7125,
-      "code": 7125,
-      "price": "130",
-      "url": "img/pear.jpg",
-      "left": "800"
-    },
-    {
-      "name": "pineapple",
-      "key": 3244,
-      "id": 3244,
-      "code": 3244,
-      "price": "150",
-      "url": "img/pineapple.jpg",
-      "left": "200"
-    },
-    {
-      "name": "grape",
-      "key": 5721,
-      "id": 5721,
-      "code": 5721,
-      "price": "126",
-      "url": "img/grape.jpg",
-      "left": "1200"
+      "name": "dog",
+      "key": 3210,
+      "id": 3210,
+      "code": 3210,
+      "price": "90",
+      "url": "img/dog.jpg",
+      "left": "9"
     }
   ]
 }

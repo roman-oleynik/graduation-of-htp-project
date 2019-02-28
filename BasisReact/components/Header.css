@@ -1,0 +1,188 @@
+.H-Navigation {
+    display: flex;
+}
+.H-Container {
+    display: flex;
+    padding: 20px 0;
+}
+.App-Nav-Ul {
+    display: flex;
+    list-style: none;
+    padding: 5px 0;
+}
+.App-Nav-Li {
+    color: #999;
+    margin-right: 20px;
+}
+.App-Nav-Li:hover {
+    color: #fff;
+    cursor: pointer;
+}
+.Header-hr {
+    height: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.Header-Container {
+    min-height: 15vh;
+    width: 100%;   
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    
+    background: #202124;
+}
+.Header-Container__Categories {
+    flex-grow: 1;
+    background: #2f75ec;
+    height: 40px;
+    flex-basis: 190px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    position: relative;
+    margin-right: 16px;
+    transition: 0.3s;
+}
+.Categories-List {
+    position: absolute;
+    top: 18vh;
+    background: #2f75ec;
+    padding: 20px;
+    list-style: none;
+    z-index: 10;
+    width: 80%;
+}
+.Categories-List-Item {
+    padding: 10px 0;
+    color: #fff;
+    cursor: pointer;
+}
+.Categories-List-Item-Blocked {
+    padding: 10px 0;
+    color: #202124;
+    cursor: pointer;
+}
+.Header-Container__Categories:hover {
+    background: #5350e2;
+    transition: 0.3s;
+}
+.Categories-Arrow {
+    height: 7px;
+    width: 10px;
+    position: absolute;
+    transition: 0.5s;
+    right: 16px;
+}
+.Categories-Arrow-Opened {
+    height: 7px;
+    width: 10px;
+    position: absolute;
+    transform: rotateX(180deg);
+    transition: 0.5s;
+    right: 16px;
+}
+.Categories-hr {
+    height: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    
+    
+}
+.Header-Container__Search-Button-Container {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex-grow: 0.3;
+}
+
+.Search-Bar-Hidden {
+    display: none;
+    margin-right: 16px;
+}
+.Search-Bar-Showed {
+    display: inline;
+    margin-right: 16px;
+    padding: 5px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+.Search-Bar-Showed::placeholder {
+    color: #fff;
+}
+.Search-Button {
+    height: 20px;width: 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 4px;
+    transition: 0.3s;
+
+}
+
+.Search-Button__Circle {
+    height: 14px;width: 14px;
+    position: absolute;
+    top: 0;right: 0;
+    border: 2px solid #fff;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+.Search-Button__Stick {
+    height: 2px;width: 14px;
+    position: absolute;
+    left: 0;bottom: 0;
+    background: #fff;
+    transition: 0.4s;
+    transform: rotate(-45deg) translateY(-4px);
+}
+.Search-Button-Cross-1 {
+    height: 2px;width: 24px;
+    position: absolute;
+    left: 0;top: 0;
+    transition: 0.4s;
+    background: #fff;
+    transform:translateX(-2px) translateY(9px) rotate(45deg);
+}
+.Search-Button-Cross-2 {
+    height: 2px;width: 24px;
+    position: absolute;
+    left: 0;top: 0;
+    background: #fff;
+    transition: 0.4s;
+    transform: translateX(-2px) translateY(9px) rotate(-45deg);
+}
+.Header-Container__Market-Title {
+    flex-grow: 6;
+    transition: 0.5s;
+    color: #fff;
+}
+.Header-Container__Cart {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+.Cart-Text {
+    color: #fff;
+    margin-right: 4px;
+    text-transform: uppercase;
+    position: relative;
+    font-size: 14px;
+}
+.Img-Cart {
+    height: 20px;width: 20px;
+    margin-right: 6px;
+}
+.Cart-Num {
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+    background: #2f75ec;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

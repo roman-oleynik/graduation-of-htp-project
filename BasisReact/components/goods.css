@@ -1,0 +1,19 @@
+.TableItem {
+    border: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+    flex-basis: 240px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    padding: 3px;
+}
+.EditDeleteButtonsBlock {
+    display: flex
+}
+.selTitle {
+    transform: rotateY(360deg);
+    transition: 0.8s;
+}

@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
 * {
     font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 .selected {
     background: linear-gradient(30deg, darkseagreen, darkcyan);
-}
-td {
-    border: 1px solid #000;
-    border-radius: 8px;
-    padding: 5px;
 }
 img {
     height: 80px;
@@ -19,6 +17,10 @@ img {
 }
 .ProductsListAndButton {
     margin-right: 40px;
+}
+.ProductsList {
+    display: flex;
+    flex-wrap: wrap;
 }
 .CardAndFormBlock {
     display: flex;

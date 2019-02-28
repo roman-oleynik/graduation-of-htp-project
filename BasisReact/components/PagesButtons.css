@@ -1,0 +1,20 @@
+.PagesButtonsBlock {
+    display: flex;
+
+}
+.PageButton {
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000; 
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+.PageButton:hover {
+    background: lightgreen;
+    transition: 0.5s;
+}

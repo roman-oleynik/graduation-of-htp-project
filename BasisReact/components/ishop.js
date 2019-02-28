@@ -1,10 +1,14 @@
 import React from 'react';
 import isoFetch from 'isomorphic-fetch';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 import './ishop.css';
 
 import TableInnerData from './Sort';
+import PagesButtons from './PagesButtons';
+import Header from './Header';
+import HomePage from './HomePage';
+import About from './About';
 
 import Product from './goods';
 import Card from './itemCard';
@@ -12,15 +16,19 @@ import Form from './newGood';
 
 class IShop extends React.Component {
     state = {
+        page: 1,
         products: [],
+        filteredProducts: [],
+        filterMode: false,
+        filterCriterion: "",
         markedItem: null,
         editedItem: null,
         buttonSubmitDisabled: true,
         appMode: 1,
-        nameSortMode: window.location.href === "http://localhost:8080/SortNameInc" ? 1 : window.location.href === "http://localhost:8080/SortNameDec" ? 2 : null,
-        priceSortMode: window.location.href === "http://localhost:8080/SortPriceInc" ? 1 : window.location.href === "http://localhost:8080/SortPriceDec" ? 2 : null,
-        urlSortMode: window.location.href === "http://localhost:8080/SortPictureInc" ? 1 : window.location.href === "http://localhost:8080/SortPictureDec" ? 2 : null,
-        leftSortMode: window.location.href === "http://localhost:8080/SortLeftInc" ? 1 : window.location.href === "http://localhost:8080/SortLeftDec" ? 2 : null,
+        // nameSortMode: window.location.href === "http://localhost:8080/SortNameInc" ? 1 : window.location.href === "http://localhost:8080/SortNameDec" ? 2 : null,
+        // priceSortMode: window.location.href === "http://localhost:8080/SortPriceInc" ? 1 : window.location.href === "http://localhost:8080/SortPriceDec" ? 2 : null,
+        // urlSortMode: window.location.href === "http://localhost:8080/SortPictureInc" ? 1 : window.location.href === "http://localhost:8080/SortPictureDec" ? 2 : null,
+        // leftSortMode: window.location.href === "http://localhost:8080/SortLeftInc" ? 1 : window.location.href === "http://localhost:8080/SortLeftDec" ? 2 : null,
         nameFieldValid: false,
         priceFieldValid: false,
         urlFieldValid: false,
@@ -29,7 +37,9 @@ class IShop extends React.Component {
         priceFieldValue: '',
         urlFieldValue: '',
         leftFieldValue: '',
-        dataReady:false,
+        dataReady: false,
+        filterCategoriesMode: "all",
+        spaMode: 'nav-home',
     };
 
     fetchError = (errorMessage) => {
@@ -39,7 +49,8 @@ class IShop extends React.Component {
     fetchSuccess = (loadedData) => {
         this.setState({
           dataReady:true,
-          products: loadedData
+          products: loadedData,
+          filteredProducts: loadedData
         });
     };
 
@@ -86,194 +97,74 @@ class IShop extends React.Component {
     };
 
 
-    addNewItem = () => {
-        this.setState({
-            appMode:2
-        })
-    };
+    // addNewItem = () => {
+    //     this.setState({
+    //         appMode:2
+    //     })
+    // };
 
-    editItem = (id, i) => {
-        this.setState({
-            markedItem:id,
-            appMode: 3,
-            editedItem: id,
-            nameFieldValue: this.state.products[i].name,
-            priceFieldValue: this.state.products[i].price,
-            urlFieldValue: this.state.products[i].url,
-            leftFieldValue: this.state.products[i].left,
-            nameFieldValid: true,
-            priceFieldValid: true,
-            urlFieldValid: true,
-            leftFieldValid: true,
-            buttonSubmitDisabled: false,
-        });
-    };
+    // editItem = (id, i) => {
+    //     this.setState({
+    //         markedItem:id,
+    //         appMode: 3,
+    //         editedItem: id,
+    //         nameFieldValue: this.state.products[i].name,
+    //         priceFieldValue: this.state.products[i].price,
+    //         urlFieldValue: this.state.products[i].url,
+    //         leftFieldValue: this.state.products[i].left,
+    //         nameFieldValid: true,
+    //         priceFieldValid: true,
+    //         urlFieldValid: true,
+    //         leftFieldValid: true,
+    //         buttonSubmitDisabled: false,
+    //     });
+    // };
 
-    deleteItem = (id) => {
+    // deleteItem = (id) => {
         
-        const conf = confirm('Do you really want to delete this item?');
-        if (conf) {
-            isoFetch("http://localhost:3000/array/" + id, {
-                method: 'delete',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-            })
+    //     const conf = confirm('Do you really want to delete this item?');
+    //     if (conf) {
+    //         isoFetch("http://localhost:3000/array/" + id, {
+    //             method: 'delete',
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Accept": "application/json",
+    //             },
+    //         })
             
-            this.setState({
-                products: this.state.products.filter(e => {
-                    return e.code !== id
-                })
-            })
-        }
-    };
+    //         this.setState({
+    //             products: this.state.products.filter(e => {
+    //                 return e.code !== id
+    //             }),
+    //             page: 1
+    //         })
+    //     }
+    // };
 
-    validateField = (target) => {
-        let inputName = target.name;
-        let inputClassName = target.className;
-        let inputValue = target.value;
-        this.setState({
-            [inputClassName]: inputValue
-        });
-        inputValue !== ""
-        ?
-        this.setState({
-            [inputName] : true,
-        }) 
-        :
-        this.setState({
-            [inputName] : false
-        });
+    // validateField = (target) => {
+    //     let inputName = target.name;
+    //     let inputClassName = target.className;
+    //     let inputValue = target.value;
+    //     this.setState({
+    //         [inputClassName]: inputValue
+    //     });
+    //     inputValue !== ""
+    //     ?
+    //     this.setState({
+    //         [inputName] : true,
+    //     }) 
+    //     :
+    //     this.setState({
+    //         [inputName] : false
+    //     });
         
 
         
         
         
-    };
+    // };
 
-    sortData = (EO) => {
-        if (this.state.appMode !== 1) {
-            return;
-        }
-        
-        let sortedProducts;
-        this.setState({
-            nameSortMode: null,
-            priceSortMode: null,
-            urlSortMode: null,
-            leftSortMode: null
-        });
-        //sorting by "Name" field
-        if (EO.target.className === `TableHeaderName ${this.state.nameSortMode === 1 ? "SortInc" : this.state.nameSortMode === 2 ? "SortDec" : ""}` && this.state.nameSortMode === null) {
-            this.setState({
-                nameSortMode: 1,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: null
-            });
-            
-            sortedProducts = this.state.products.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        }  else if (EO.target.className === `TableHeaderName ${this.state.nameSortMode === 1 ? "SortInc" : this.state.nameSortMode === 2 ? "SortDec" : ""}` && this.state.nameSortMode === 1) {
-            this.setState({
-                nameSortMode: 2,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0));
-        }   else if (EO.target.className === `TableHeaderName ${this.state.nameSortMode === 1 ? "SortInc" : this.state.nameSortMode === 2 ? "SortDec" : ""}` && this.state.nameSortMode === 2) {
-            this.setState({
-                nameSortMode: 1,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        }
-        //sorting by "Price" field
-        if (EO.target.className === `TableHeaderPrice ${this.state.priceSortMode === 1 ? "SortInc" : this.state.priceSortMode === 2 ? "SortDec" : ""}` && this.state.priceSortMode === null) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: 1,
-                urlSortMode: null,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-        }  else if (EO.target.className === `TableHeaderPrice ${this.state.priceSortMode === 1 ? "SortInc" : this.state.priceSortMode === 2 ? "SortDec" : ""}` && this.state.priceSortMode === 1) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: 2,
-                urlSortMode: null,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.price < b.price) ? 1 : ((b.price < a.price) ? -1 : 0));
-        }   else if (EO.target.className === `TableHeaderPrice ${this.state.priceSortMode === 1 ? "SortInc" : this.state.priceSortMode === 2 ? "SortDec" : ""}` && this.state.priceSortMode === 2) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: 1,
-                urlSortMode: null,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-        }
-        //sorting by "Picture" field
-        if (EO.target.className === `TableHeaderPicture ${this.state.urlSortMode === 1 ? "SortInc" : this.state.urlSortMode === 2 ? "SortDec" : ""}` && this.state.urlSortMode === null) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: 1,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.url > b.url) ? 1 : ((b.url > a.url) ? -1 : 0));
-        }  else if (EO.target.className === `TableHeaderPicture ${this.state.urlSortMode === 1 ? "SortInc" : this.state.urlSortMode === 2 ? "SortDec" : ""}` && this.state.urlSortMode === 1) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: 2,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.url < b.url) ? 1 : ((b.url < a.url) ? -1 : 0));
-        }   else if (EO.target.className === `TableHeaderPicture ${this.state.urlSortMode === 1 ? "SortInc" : this.state.urlSortMode === 2 ? "SortDec" : ""}` && this.state.urlSortMode === 2) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: 1,
-                leftSortMode: null
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.url > b.url) ? 1 : ((b.url > a.url) ? -1 : 0));
-        }
-        //sorting by "Left" field
-        if (EO.target.className === `TableHeaderLeft ${this.state.leftSortMode === 1 ? "SortInc" : this.state.leftSortMode === 2 ? "SortDec" : ""}` && this.state.leftSortMode === null) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: 1
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.left > b.left) ? 1 : ((b.left > a.left) ? -1 : 0));
-        }  else if (EO.target.className === `TableHeaderLeft ${this.state.leftSortMode === 1 ? "SortInc" : this.state.leftSortMode === 2 ? "SortDec" : ""}` && this.state.leftSortMode === 1) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: 2
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.left < b.left) ? 1 : ((b.left < a.left) ? -1 : 0));
-        }   else if (EO.target.className === `TableHeaderLeft ${this.state.leftSortMode === 1 ? "SortInc" : this.state.leftSortMode === 2 ? "SortDec" : ""}` && this.state.leftSortMode === 2) {
-            this.setState({
-                nameSortMode: null,
-                priceSortMode: null,
-                urlSortMode: null,
-                leftSortMode: 1
-            })
-            sortedProducts = this.state.products.sort((a,b) => (a.left > b.left) ? 1 : ((b.left > a.left) ? -1 : 0));
-        }
-
-        this.setState({
-            products: sortedProducts
-        })    
-    }
+    
 
     submitData = () => {
         
@@ -331,26 +222,18 @@ class IShop extends React.Component {
         else if (this.state.appMode === 3 && this.state.nameFieldValid && this.state.priceFieldValid &&
             this.state.urlFieldValid && this.state.leftFieldValid) {
                 this.setState({dataReady:false})
-                console.log(this.state.editedItem)
                 let newGood = {
                     name: this.state.nameFieldValue, 
-                    key: this.state.products, 
-                    id: this.state.products, 
-                    code: this.state.products, 
+                    key: this.state.editedItem, 
+                    id: this.state.editedItem, 
+                    code: this.state.editedItem, 
                     price: this.state.priceFieldValue, 
                     url: this.state.urlFieldValue, 
                     left: this.state.leftFieldValue
                 };
+                
                 isoFetch("http://localhost:3000/array/" + this.state.editedItem, {
-                    method: 'delete',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                    
-                })
-                isoFetch("http://localhost:3000/array", {
-                    method: 'post',
+                    method: 'put',
                     headers: {
                         "Content-Type": "application/json",
                         "Accept": "application/json",
@@ -367,7 +250,7 @@ class IShop extends React.Component {
                         return response.json(); 
                 })
                 .then( (data) => {
-                    
+                    console.log(data);
                     this.setState({
                         products: this.state.products.map( el => {
                             if (el.code === this.state.editedItem) {
@@ -413,303 +296,194 @@ class IShop extends React.Component {
             buttonSubmitDisabled: true,
         })
     };
+
+    goToPage = (page) => {
+        console.log(page)
+        this.setState({
+            page
+        })
+    };
+
+    switchFilterCategoriesMode = (filterCategoriesMode) => {
+        this.state.filterCategoriesMode !== filterCategoriesMode 
+        &&
+        this.setState({
+            spaMode: 2,
+            filterCategoriesMode
+        })
+    };
+
+    changeSPAMode = (spaMode) => {
+        this.setState({
+            spaMode
+        })
+    };
+
+    searchByName = (value) => {
+        
+        console.log(value)
+        let prodArr = [...this.state.products];
+        let prodArrFiltered = prodArr.filter (el => {
+            return el.name === value;
+        })
+        console.log(prodArrFiltered)
+        this.setState({
+            filterCriterion: value,
+            filterMode: true,
+            spaMode: 'nav-goods',
+            filteredProducts: prodArrFiltered
+        })
+    };
     
     render() {        
-        return <div className='MarketBlock'>
-                    
-                    <h1 className='MarketTitle'>The Reactive Market</h1>
-                    <p>Click two and more times to write down sort parameters to URL</p>
-                    <div className='AppContainer'>
-                        <div className='ProductsListAndButton'>
-                            <div className='ProductsList'>
-                                <table className='Table'>
-                                    <tbody>
-                                        {   
-                                            this.state.dataReady === false ?
-                                            <img src="img/preloader.gif" />:
-                                            <Route 
-                                                exact
-                                                path='/' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                        loadingFinished= {this.state.loadingFinished}
-                                                        products = {this.state.products}
-                                                        markItem = {this.markItem}
-                                                        editItem = {this.editItem}
-                                                        deleteItem = {this.deleteItem}
-                                                        sortData = {this.sortData}
-                                                        selected = {this.state.markedItem}
-                                                        appMode = {this.state.appMode}
-                                                        nameSortMode= {this.state.nameSortMode}
-                                                        priceSortMode= {this.state.priceSortMode}
-                                                        urlSortMode= {this.state.urlSortMode}
-                                                        leftSortMode= {this.state.leftSortMode}
-                                                        dataReady={this.state.dataReady}
-                                                        {...props}
-                                                    />
-                                                }
-                                            /> 
-                                        }
-                                        {   
+        return <React.Fragment>
+            <Header
+                filterCategoriesMode = {this.state.filterCategoriesMode}
+                switchFilterCategoriesMode = {this.switchFilterCategoriesMode}
+                changeSPAMode = {this.changeSPAMode}
+                searchByName = {this.searchByName}
+            />
+            {
+            this.state.spaMode === 'nav-home' 
+            ?
+            <React.Fragment>
+                <BrowserRouter>
+                    <HomePage />
+                </BrowserRouter>
+            </React.Fragment>
+            :
+            this.state.spaMode === 'nav-goods' 
+            ?
+                <BrowserRouter>
+                <div className='MarketBlock'>
+                        <div className='AppContainer'>
+                            <div className='ProductsListAndButton'>
+                                <div className='ProductsList'>
+                                    {/* {
+                                        this.state.filterMode === true && this.state.filterCriterion !== "" &&
+                                        <span>Search results by criterion: "{this.state.filterCriterion}"</span>
+                                    } */}
+                                            {   
+                                                this.state.dataReady === false ?
+                                                <img src="img/preloader.gif" />:
+                                                <Route 
+                                                    exact
+                                                    path={`/`} 
+                                                    render={
+                                                    (props)=><TableInnerData
+                                                            goToPage = {this.goToPage}
+                                                            page = {this.state.page}
+                                                            loadingFinished= {this.state.loadingFinished}
+                                                            products = {this.state.products}
+                                                            filteredProducts = {this.state.filteredProducts}
+                                                            filterMode = {this.state.filterMode}
+                                                            markItem = {this.markItem}
+                                                            editItem = {this.editItem}
+                                                            deleteItem = {this.deleteItem}
+                                                            sortData = {this.sortData}
+                                                            selected = {this.state.markedItem}
+                                                            appMode = {this.state.appMode}
+                                                            nameSortMode= {this.state.nameSortMode}
+                                                            priceSortMode= {this.state.priceSortMode}
+                                                            urlSortMode= {this.state.urlSortMode}
+                                                            leftSortMode= {this.state.leftSortMode}
+                                                            dataReady={this.state.dataReady}
+                                                            {...props}
+                                                        />
+                                                    }
+                                                /> 
+                                            }
                                             
-                                            <Route 
-                                                exact
-                                                path='/SortNameInc' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
+                                </div>
 
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortNameDec' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortPriceInc' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortPriceDec' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortPictureInc' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortPictureDec' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-
-
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortLeftInc' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-
-                                        {   
-                                            <Route 
-                                                exact
-                                                path='/SortLeftDec' 
-                                                render={
-                                                (props)=><TableInnerData
-                                                    products = {this.state.products}
-                                                    markItem = {this.markItem}
-                                                    editItem = {this.editItem}
-                                                    deleteItem = {this.deleteItem}
-                                                    sortData = {this.sortData}
-                                                    selected = {this.state.markedItem}
-                                                    appMode = {this.state.appMode}
-                                                    nameSortMode= {this.state.nameSortMode}
-                                                    priceSortMode= {this.state.priceSortMode}
-                                                    urlSortMode= {this.state.urlSortMode}
-                                                    leftSortMode= {this.state.leftSortMode}
-                                                    {...props}
-                                                />
-                                                }
-                                            /> 
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button className='NewLI' onClick={this.addNewItem}>Click to add new list item</button>
-                            
-                        </div>
-
-                        <div className='CardAndFormBlock'>
-                            <div className='CardBlock'>
-                            {this.state.appMode === 1 && this.state.products.map( el => {
-                                return <Card 
-                                    itemName = {el.name}
-                                    key = {el.code}
-                                    id = {el.code}
-                                    itemLeft = {el.left}
-                                    itemPrice = {el.price}
-                                    pictureUrl = {el.url}
-                                    products = {this.props.products}
-                                    markItem = {this.markItem}
-                                    selected = {this.state.markedItem}
+                                <PagesButtons 
+                                    goToPage = {this.goToPage}
+                                    page = {this.state.page}
+                                    products = {this.state.products}
                                 />
-                            })}
+
+                                <button className='NewLI' onClick={this.addNewItem}>Click to add new list item</button>
+                                
                             </div>
-                            <div className='FormBlock'>
-                                {this.state.appMode === 2 &&
-                                    <Form 
-                                        dataReady={this.state.dataReady}
-                                        newItemRequested = {this.state.newItemRequested}
-                                        nameFieldValid = {this.state.nameFieldValid}
-                                        priceFieldValid = {this.state.priceFieldValid}
-                                        urlFieldValid = {this.state.urlFieldValid}
-                                        leftFieldValid = {this.state.leftFieldValid}
-                                        nameFieldValue = {this.state.nameFieldValue}
-                                        priceFieldValue = {this.state.priceFieldValue}
-                                        urlFieldValue = {this.state.urlFieldValue}
-                                        leftFieldValue = {this.state.leftFieldValue}
-                                        validateField = {this.validateField}
-                                        products = {this.props.products} 
+
+                            <div className='CardAndFormBlock'>
+                                {/* <div className='CardBlock'>
+                                {this.state.appMode === 1 && this.state.products.map( el => {
+                                    return <Card 
+                                        itemName = {el.name}
+                                        key = {el.code}
+                                        id = {el.code}
+                                        itemLeft = {el.left}
+                                        itemPrice = {el.price}
+                                        pictureUrl = {el.url}
+                                        products = {this.props.products}
+                                        markItem = {this.markItem}
                                         selected = {this.state.markedItem}
-                                        appMode = {this.state.appMode}
-                                        submitData = {this.submitData}
-                                        canselForm = {this.canselForm}
-                                        disabled = {this.state.buttonSubmitDisabled}
                                     />
-                                    }
-                                    {this.state.appMode === 3 &&
-                                    <Form 
-                                        dataReady={this.state.dataReady}
-                                        newItemRequested = {this.state.newItemRequested}
-                                        nameFieldValid = {this.state.nameFieldValid}
-                                        priceFieldValid = {this.state.priceFieldValid}
-                                        urlFieldValid = {this.state.urlFieldValid}
-                                        leftFieldValid = {this.state.leftFieldValid}
-                                        nameFieldValue = {this.state.nameFieldValue}
-                                        priceFieldValue = {this.state.priceFieldValue}
-                                        urlFieldValue = {this.state.urlFieldValue}
-                                        leftFieldValue = {this.state.leftFieldValue}
-                                        validateField = {this.validateField}
-                                        products = {this.props.products} 
-                                        selected = {this.state.markedItem}
-                                        editedItem = {this.state.editedItem}
-                                        appMode = {this.state.appMode}
-                                        submitData = {this.submitData}
-                                        canselForm = {this.canselForm}
-                                        disabled = {this.state.buttonSubmitDisabled}
-                                    />
-                                    }
+                                })}
+                                </div> */}
+                                <div className='FormBlock'>
+                                    {this.state.appMode === 2 &&
+                                        <Form 
+                                            dataReady={this.state.dataReady}
+                                            newItemRequested = {this.state.newItemRequested}
+                                            nameFieldValid = {this.state.nameFieldValid}
+                                            priceFieldValid = {this.state.priceFieldValid}
+                                            urlFieldValid = {this.state.urlFieldValid}
+                                            leftFieldValid = {this.state.leftFieldValid}
+                                            nameFieldValue = {this.state.nameFieldValue}
+                                            priceFieldValue = {this.state.priceFieldValue}
+                                            urlFieldValue = {this.state.urlFieldValue}
+                                            leftFieldValue = {this.state.leftFieldValue}
+                                            validateField = {this.validateField}
+                                            products = {this.props.products} 
+                                            selected = {this.state.markedItem}
+                                            appMode = {this.state.appMode}
+                                            submitData = {this.submitData}
+                                            canselForm = {this.canselForm}
+                                            disabled = {this.state.buttonSubmitDisabled}
+                                        />
+                                        }
+                                        {this.state.appMode === 3 &&
+                                        <Form 
+                                            dataReady={this.state.dataReady}
+                                            newItemRequested = {this.state.newItemRequested}
+                                            nameFieldValid = {this.state.nameFieldValid}
+                                            priceFieldValid = {this.state.priceFieldValid}
+                                            urlFieldValid = {this.state.urlFieldValid}
+                                            leftFieldValid = {this.state.leftFieldValid}
+                                            nameFieldValue = {this.state.nameFieldValue}
+                                            priceFieldValue = {this.state.priceFieldValue}
+                                            urlFieldValue = {this.state.urlFieldValue}
+                                            leftFieldValue = {this.state.leftFieldValue}
+                                            validateField = {this.validateField}
+                                            products = {this.props.products} 
+                                            selected = {this.state.markedItem}
+                                            editedItem = {this.state.editedItem}
+                                            appMode = {this.state.appMode}
+                                            submitData = {this.submitData}
+                                            canselForm = {this.canselForm}
+                                            disabled = {this.state.buttonSubmitDisabled}
+                                        />
+                                        }
+                                </div>
                             </div>
                         </div>
-                    </div>
-               </div> 
+                </div> 
+                </BrowserRouter>
+                :
+                this.state.spaMode === 'nav-about'
+                ?
+                <BrowserRouter>
+                    <About />
+                </BrowserRouter>
+                : 
+                null
+            }
+        </React.Fragment>
+        
+        
+            
     }
 }
 
