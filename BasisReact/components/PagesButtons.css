@@ -1,6 +1,7 @@
 .PagesButtonsBlock {
     display: flex;
-
+    justify-content: center;
+    align-items: center;
 }
 .PageButton {
     height: 30px;
@@ -14,7 +15,75 @@
     transition: 0.5s;
 
 }
-.PageButton:hover {
-    background: lightgreen;
+.PageButton-Selected {
+    height: 30px;
+    width: 30px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: #2f75ec;
+    cursor: pointer;
     transition: 0.5s;
+}
+.PageButton:hover {
+    background: #2f75ec;
+    transition: 0.5s;
+}
+.Pages-Buttons-Arrow-Left {
+    background: transparent;
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    height: 26px;
+    width: 26px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Pages-Buttons-Arrow-Left:disabled {
+    color: #999;
+}
+.Pages-Buttons-Arrow-Left:hover {
+    background: #2f75ec;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    height: 26px;
+    width: 26px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.Pages-Buttons-Arrow-Right {
+    background: transparent;
+    border: 0;
+    color: #000;
+    font-weight: bold;
+    height: 26px;
+    width: 26px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Pages-Buttons-Arrow-Right:disabled {
+    color: #999;
+}
+.Pages-Buttons-Arrow-Right:hover {
+    background: #2f75ec;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    height: 26px;
+    width: 26px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
 }

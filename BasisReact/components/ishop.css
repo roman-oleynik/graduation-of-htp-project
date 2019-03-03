@@ -6,31 +6,20 @@
     box-sizing: border-box;
 }
 .selected {
-    background: linear-gradient(30deg, darkseagreen, darkcyan);
+    background: #2f75ec;
 }
 img {
     height: 80px;
 }
-
 .AppContainer {
     display: flex;
-}
-.ProductsListAndButton {
-    margin-right: 40px;
 }
 .ProductsList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
-.CardAndFormBlock {
-    display: flex;
-    flex-direction: column;
+.App {
+    min-height: 100vh;
+    position: relative;
 }
-.SortInc {
-    background: #0f0;
-}
-.SortDec {
-    background: #f00;
-}
-
-

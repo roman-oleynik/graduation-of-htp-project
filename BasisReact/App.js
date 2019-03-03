@@ -11,7 +11,10 @@ let productsList = [];
        
        
 ReactDOM.render(
-    <IShop products = {productsList} />
+    <BrowserRouter>
+        <IShop products = {productsList} />
+    </BrowserRouter>
+    
     ,            
     document.getElementById('container')
 );
