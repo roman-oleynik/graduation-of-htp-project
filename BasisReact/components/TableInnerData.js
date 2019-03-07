@@ -13,11 +13,12 @@ class TableInnerData extends React.Component {
     sortData = (EO) => {
         this.props.sortData(EO)
     }
-    subcategory = this.props.match.params.subcategory;
-    
     
     render() {
         let subcategory = this.props.match.params.subcategory;
+        console.log(subcategory)
+        let filteredProducts = this.props.products.filter (el => el.subcategory === subcategory || subcategory === 'all');
+        console.log(filteredProducts)
         return this.props.dataReady === false 
         ?
         <img className='Preloader' src="https://cdn.cssauthor.com/wp-content/uploads/2018/06/Animated-Loading-%C3%97-1.gif" />
@@ -35,9 +36,9 @@ class TableInnerData extends React.Component {
                 />
                 <div className='TableInnerData'>    
                 {   
-                    this.props.filterMode === true || subcategory !== 'all'
+                    this.props.filterMode === false && subcategory !== 'all'
                     ?
-                    this.props.filteredProducts.map((el,i) => {
+                    filteredProducts.map((el,i) => {
                         return <Product
                             page = {this.props.page}
                             prodPage = {Math.floor(i/50)}
@@ -52,6 +53,36 @@ class TableInnerData extends React.Component {
                             routedSubcategory = {subcategory}
                             filterByCategory = {this.props.filterByCategory}
                             products = {this.props.products}
+                            filteredProducts = {filteredProducts}
+                            markItem = {this.props.markItem}
+                            editItem = {this.props.editItem}
+                            deleteItem = {this.props.deleteItem}
+                            selected = {this.props.selected}
+                            appMode = {this.props.appMode}
+                            prodAddToCart = {this.props.prodAddToCart}
+                            arrayIndex= {i}
+                        />
+                    })
+                    :
+                    this.props.filterMode === true
+                    ?
+                    this.props.filteredProducts.map((el,i) => {
+                        
+                        return <Product
+                            page = {this.props.page}
+                            prodPage = {Math.floor(i/50)}
+                            className = "TableItem" 
+                            itemName = {el.name}
+                            key = {el.code}
+                            id = {el.code}
+                            itemLeft = {el.left}
+                            itemPrice = {el.price}
+                            itemSubcategory = {el.subcategory}
+                            routedSubcategory = {subcategory}
+                            filterByCategory = {this.props.filterByCategory}
+                            pictureUrl = {el.url}
+                            products = {this.props.products}
+                            filteredProducts = {filteredProducts}
                             markItem = {this.props.markItem}
                             editItem = {this.props.editItem}
                             deleteItem = {this.props.deleteItem}
@@ -78,6 +109,7 @@ class TableInnerData extends React.Component {
                             filterByCategory = {this.props.filterByCategory}
                             pictureUrl = {el.url}
                             products = {this.props.products}
+                            filteredProducts = {filteredProducts}
                             markItem = {this.props.markItem}
                             editItem = {this.props.editItem}
                             deleteItem = {this.props.deleteItem}
@@ -87,11 +119,12 @@ class TableInnerData extends React.Component {
                             arrayIndex= {i}
                         />
                     })
+
                     
                 }
                 <ItemCard 
                     products = {this.props.products}
-                    filteredProducts = {this.props.filteredProducts}
+                    filteredProducts = {filteredProducts}
                     selected = {this.props.selected} 
                 />
             </div> 

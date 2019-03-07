@@ -30,10 +30,15 @@ img {
     width: 240px;
     flex-basis: 240px;
     margin: 10px;
-    /* cursor: pointer; */
     padding: 3px;
     position: relative;
     text-align: center;
+    transition: 0.3s;
+
+}
+.TableItem:hover {
+    background: #2f75fd;
+    transition: 0.3s;
 }
 .TableItemName {
     padding: 10px 0;
@@ -44,9 +49,7 @@ img {
 .EditDeleteButtonsBlock {
     display: flex;
 }
-.selected {
-    background: #2f75fd;
-}
+
 .TableItemAddToCartButton {
     height: 32px;
     width: 32px;
@@ -171,41 +174,93 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    padding-top: 15vh;
+    justify-content: space-around;
     text-align: center;
-    padding: 10px;
-    background: #2f75fd; 
+    background: #fff; 
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    box-sizing: border-box;
+}
+
+.ProductCardCloseButton {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 15px;
+    top: 14vh;
+    cursor: pointer;
+}
+.ProductCardName {
+    font-size: 30px;
+    line-height: 50px;
+}
+.ProductCardPrice {
+    padding: 5px 0;
+    font-size: 20px;
 }
 
 .trans-appear {
     transform: translateX(100%);
-    transition: 0.8s
+    transition: 0.4s
 }
 .trans-appear-active {
-    transition: 0.8s;
+    transition: 0.4s;
     transform: translateX(-10%)
 }
 .trans-enter {
     transform: translateX(-10%);
-    transition: 0.8s
+    transition: 0.4s
 }
 .trans-enter-done {
-    transition: 0.8s;
+    transition: 0.4s;
     transform: translateX(0)
 }
 .trans-exit {
     transform: translateX(0);
-    transition: 0.8s
+    transition: 0.4s
 }
 .trans-exit-active {
-    transition: 0.8s;
+    transition: 0.4s;
     transform: translateX(100%)
 }
 .trans-exit-done {
     transform: translateX(100%)
 }
 
-a {
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .ProductCard {
+        width: 100%;
+    }
+    .ProductCardDescription {
+        font-size: 14px;       
+    }
+    .ProductCardCloseButton {
+        top: 16vh;
+    }
+}
+
+@media only screen 
+  and (max-device-height: 600px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .ProductCardDescription {
+        font-size: 12px;       
+    }
+    .ProductCardName {
+        font-size: 20px;
+    }
+    .ProductCardCloseButton {
+        top: 18vh;
+    }
+    .ProductCardPicture {
+        height: 220px;
+    }
+}a {
     text-decoration: none;
     color: #000;
     font-weight: bold;
@@ -304,7 +359,6 @@ a {
 .Cart-Items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 .CleanTheCart {
     background: palevioletred;
@@ -912,4 +966,4 @@ a {
     display: flex;
     align-items: center;
 }
-/*# sourceMappingURL=main.bundle.8dfab7d8ad15feae9a2e.css.map*/
+/*# sourceMappingURL=main.bundle.5d5161eb4c9032fc502f.css.map*/

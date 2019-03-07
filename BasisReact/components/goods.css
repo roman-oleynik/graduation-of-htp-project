@@ -6,10 +6,15 @@
     width: 240px;
     flex-basis: 240px;
     margin: 10px;
-    /* cursor: pointer; */
     padding: 3px;
     position: relative;
     text-align: center;
+    transition: 0.3s;
+
+}
+.TableItem:hover {
+    background: #2f75fd;
+    transition: 0.3s;
 }
 .TableItemName {
     padding: 10px 0;
@@ -20,9 +25,7 @@
 .EditDeleteButtonsBlock {
     display: flex;
 }
-.selected {
-    background: #2f75fd;
-}
+
 .TableItemAddToCartButton {
     height: 32px;
     width: 32px;

@@ -28,7 +28,6 @@ class IShop extends React.Component {
         filterCriterion: "",
         markedItem: null,
         dataReady: false,
-        // filterCategoriesMode: "all",
         categoriesOpened: false,
         cart: [],
         cartPrice: 0,
@@ -52,7 +51,7 @@ class IShop extends React.Component {
         this.switchFilterCategoriesMode(category);
     };
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         isoFetch("http://localhost:3000/array", {
             method: 'get',
             headers: {
@@ -82,7 +81,7 @@ class IShop extends React.Component {
         })
 
     }
-
+    
     markItem = (id) => {
         this.state.buyMode === false &&
         this.setState({
@@ -138,7 +137,7 @@ class IShop extends React.Component {
         this.state.buyMode === false &&
         this.setState({
             page:1,            
-            filterMode: true,
+            filterMode: false,
             spaMode: 'nav-goods',
             filteredProducts: prodArrFiltered
         })
@@ -217,9 +216,7 @@ class IShop extends React.Component {
 
     closeFilterCategoriesMode = () => {
         this.setState({
-            // filterCategoriesMode: 'all',
             categoriesOpened: false,
-            filterMode: false,
             markedItem: null,
         })
     }
@@ -336,7 +333,9 @@ class IShop extends React.Component {
                                                 filteredProducts = {this.state.filteredProducts}
                                                 filterMode = {this.state.filterMode}
                                                 filterByCategory = {this.filterByCategory}
+                                                filterCriterion = {this.state.filterCriterion}
                                                 switchFilterCategoriesMode = {this.switchFilterCategoriesMode}
+                                                refreshFilteredProducts = {this.refreshFilteredProducts}
                                                 markItem = {this.markItem}
                                                 prodAddToCart = {this.prodAddToCart}
                                                 selected = {this.state.markedItem}

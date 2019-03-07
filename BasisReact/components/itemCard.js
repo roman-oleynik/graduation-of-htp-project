@@ -12,13 +12,12 @@ class Card extends React.Component {
         this.setState({
             buttonClosePressed: true,
             cardAppearStatus: false,
-        })
+        });
     }
     componentWillReceiveProps = () => {
         this.state.buttonClosePressed === true && this.setState({cardAppearStatus: true, buttonClosePressed: false})
     }
     render() {
-        console.log(this.state.cardAppearStatus)
         let selectedProduct = this.props.products.find(el=>el.id === this.props.selected);
         return selectedProduct !== undefined && <CSSTransition
                 in={this.state.cardAppearStatus}
