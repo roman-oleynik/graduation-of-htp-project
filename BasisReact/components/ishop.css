@@ -5,19 +5,19 @@
     padding: 0;
     box-sizing: border-box;
 }
-.selected {
+/* .selected {
     background: #2f75ec;
-}
+} */
 img {
-    height: 80px;
+    height: 280px;
 }
 .AppContainer {
     display: flex;
 }
 .ProductsList {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    padding: 0 10%;
 }
 .App {
     min-height: 100vh;

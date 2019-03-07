@@ -5,15 +5,47 @@
     align-items: center;
     width: 240px;
     flex-basis: 240px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
+    margin: 10px;
+    /* cursor: pointer; */
     padding: 3px;
+    position: relative;
+    text-align: center;
+}
+.TableItemName {
+    padding: 10px 0;
+}
+.TableItemLeft {
+    font-size: 13px;
 }
 .EditDeleteButtonsBlock {
-    display: flex
+    display: flex;
 }
-.selTitle {
-    transform: rotateY(360deg);
-    transition: 0.8s;
+.selected {
+    background: #2f75fd;
 }
+.TableItemAddToCartButton {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #2f75fd;
+    transition: 0.5s;
+    border: 0;
+}
+.TableItemAddToCartButton:hover {
+    transition: 0.5s;
+    background: palevioletred;
+}
+.TableItemAddToCartButton:active {
+    background: #2f75fd;
+}
+.AddToCartImage {
+    height: 16px;
+    width: 16px;
+}
+.TableItemCategory {
+    font-size: 12px;
+    padding-bottom: 10px;
+}
+

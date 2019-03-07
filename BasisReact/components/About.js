@@ -1,14 +1,22 @@
 import React from 'react';
 
-import './About.css'
+import './About.css';
+// import Footer from './Footer'
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 class About extends React.Component {
     render() {
-        return <React.Fragment>
-            <h1 className='About-Title'>About</h1>
-            <p className='About-Subtitle'>Это приложение было написано в рамках обучения на курсах в Образовательном Центре ПВТ с помощью библиотеки React.js. Это интернет-магазин c авторизацией, загружающий товары с помощью AJAX, с возможностью фильтрации по категориям и поиску по названию товара, а также, корзиной, где подсчитывается стоимость всех добавленных товаров.  <br /><br />Я очень благодарен <strong>Локтеву Алексею</strong> за то, что помог мне в краткие сроки разобраться в реакте. Сам бы я потратил намного больше времени, чем длились эти курсы, а время для меня сейчас очень дорого. <br /><br /> На тайпскрипт и ангуляр я подзабил из-за нехватки времени, но уверен в том, что, пересмотрев видеозаписи ваших занятий, разберусь и в них тоже. Удачи вам в дальнейшей работе. Желаю, чтобы из под вашего крыла выпустилось огромное количество хороших фронтендеров, в числе которых, надеюсь, буду и я. По крайней мере, очень стараюсь :) <br /><br /> Best regards, Roman Oleynik </p>
-        </React.Fragment>
-        
+        return <CSSTransition
+            in={true}
+            appear={true}
+            timeout={1000}
+            classNames='fade'
+        > 
+            <div className='About-Container'>
+                <h1 className='About-Title'>Made with ♥ by R. Oleynik and...</h1>
+                <img className='PHT-Logo' src='https://www.it-academy.by/local/images/logo.svg' />
+            </div>
+        </CSSTransition>
     }
 }
 

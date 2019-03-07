@@ -1,7 +1,19 @@
+.About-Container {
+    padding: 0 10%;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .About-Title {
     text-align: center;
     line-height: 60px;
 }
 .About-Subtitle {
     text-align: center;
+}
+.PHT-Logo {
+    height: 150px;
 }

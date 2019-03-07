@@ -14,21 +14,22 @@ class PagesButtons extends React.Component {
     goToPageRight = () => {
         this.props.goToPageRight();
     }
+    
     render() {
         return <div className="PagesButtonsBlock">
-            <button className='Pages-Buttons-Arrow-Left' disabled={this.props.page === 1} onClick={this.goToPageLeft}>{'<'}</button>
+            {/* <NavLink to={`/goods/${this.props.routedSubcategory}`}><button className='Pages-Buttons-Arrow-Left' disabled={this.props.page === 1} onClick={this.goToPageLeft}>{'<'}</button></NavLink> */}
             {   
-                this.props.filterMode === true 
+                this.props.filterMode === true || this.props.routedSubcategory !== 'all' 
                 ?
                 this.props.filteredProducts.map((el,i) => {
-                    return i % 10 === 0 ? <span className={`${i/10+1 === this.props.page ? "PageButton-Selected" : "PageButton"}`} key={i/10+1} id={i/10+1} onClick={this.goToPage}>{i/10+1}</span> : null
+                    return i % 50 === 0 ? <NavLink to={`/goods/${this.props.routedSubcategory}`} key={i/10+1}><span className={`${i/50+1 === this.props.page ? "PageButton-Selected" : "PageButton"}`} key={i/50+1} id={i/50+1} onClick={this.goToPage}>{i/50+1}</span></NavLink> : null
                 })
                 :
                 this.props.products.map((el,i) => {
-                    return i % 10 === 0 ? <span className={`${i/10+1 === this.props.page ? "PageButton-Selected" : "PageButton"}`} key={i/10+1} id={i/10+1} onClick={this.goToPage}>{i/10+1}</span> : null
+                    return i % 50 === 0 ? <NavLink to={`/goods/${this.props.routedSubcategory}`} key={i/10+1}><span className={`${i/50+1 === this.props.page ? "PageButton-Selected" : "PageButton"}`}  id={i/50+1} onClick={this.goToPage}>{i/50+1}</span></NavLink> : null
                 })
             }
-            <button className='Pages-Buttons-Arrow-Right' disabled={(this.props.page === Math.ceil(this.props.products.length/10) && this.props.filterMode === false) || (this.props.page === Math.ceil(this.props.filteredProducts.length/10) && this.props.filterMode === true)} onClick={this.goToPageRight}>></button>
+            {/* <NavLink to={`/goods/${this.props.routedSubcategory}`}><button className='Pages-Buttons-Arrow-Right' disabled={(this.props.page === Math.ceil(this.props.products.length/50) && this.props.filterMode === false) || (this.props.page === Math.ceil(this.props.filteredProducts.length/50) && this.props.filterMode === true)} onClick={this.goToPageRight}>></button></NavLink> */}
             
         </div>
     }
