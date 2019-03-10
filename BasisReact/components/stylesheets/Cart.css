@@ -19,7 +19,7 @@
     border-radius: 5px;
 }
 .Cart-Text {
-    color: #000;
+    color: #fff;
     margin-right: 4px;
     text-transform: uppercase;
     position: relative;
@@ -46,8 +46,8 @@
     flex-direction: column;
     top: 12vh;
     right: 0;
-    background: lightskyblue;
-    color: #000;
+    background: #202124;
+    color: #acacac;
     width: 900px;
     padding: 10px;
     z-index: 100;
@@ -57,7 +57,7 @@
     flex-wrap: wrap;
 }
 .CleanTheCart {
-    background: palevioletred;
+    background: coral;
     border: 0;
     padding: 2px;
     border-radius: 5px; 
@@ -77,6 +77,7 @@
     }
     .Cart__Container {
         top: 8vh;
+        right: -10vw;
         width: 80vw;
     }
 }

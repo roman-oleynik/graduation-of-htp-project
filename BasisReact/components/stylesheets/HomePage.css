@@ -11,12 +11,12 @@
 }
 .HomePage__Title {
     font-size: 60px;
-    color: lightblue;
+    color: #2f75fd;
 
 }
 .HomePage__Subtitle {
     font-size: 30px;
-    color: lightgray;
+    color: gray;
 
 }
 .HomePage__GetStarted {
@@ -40,12 +40,12 @@
   and (orientation: portrait) {
     .HomePage__Title {
         font-size: 40px;
-        color: lightblue;
+        color: #2f75ec;
     
     }
     .HomePage__Subtitle {
         font-size: 20px;
-        color: lightgray;
+        color: gray;
     
     }
 }

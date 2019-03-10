@@ -3,7 +3,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
 import Cart from './Cart';
 
-import './HeaderAbout.css';
+import './stylesheets/HeaderAbout.css';
 
 class HeaderAbout extends React.Component {
     

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
-import "./PagesButtons.css";
+import "./stylesheets/PagesButtons.css";
 
 class PagesButtons extends React.Component {
     goToPage = (EO) => {

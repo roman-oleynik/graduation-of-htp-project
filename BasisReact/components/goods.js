@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 
-import "./goods.css";
+import "./stylesheets/goods.css";
 
 class Product extends React.Component {
    
@@ -17,12 +17,14 @@ class Product extends React.Component {
       this.props.prodAddToCart(this.props.id);
    }
    render() {
-      return this.props.page === this.props.prodPage+1 && (this.props.routedSubcategory === this.props.itemSubcategory || this.props.routedSubcategory === 'all') && <CSSTransition
+      return this.props.page === this.props.prodPage+1 && (this.props.routedSubcategory === this.props.itemSubcategory || this.props.routedSubcategory === 'all') && 
+      <CSSTransition
             in={true}
             appear={true}
             timeout={1000}
             classNames='fade'
-      ><div className={`TableItem ${this.props.selected === this.props.id ? "selected" : this.props.appMode === 3 && this.props.selected === this.props.id ? " selected" : null}`} id={this.props.id} onClick={this.prodMark}>
+      >
+      <div className={`TableItem ${this.props.selected === this.props.id ? "selected" : this.props.appMode === 3 && this.props.selected === this.props.id ? " selected" : null}`} id={this.props.id} onClick={this.prodMark}>
                   <h3 className={`TableItemName ${this.props.selected === this.props.id ? "selTitle" : this.props.appMode === 3 && this.props.selected === this.props.id ? " selTitle" : null}`}>{this.props.itemName}</h3>
                   <div className='TableItemCategory'>{this.props.itemSubcategory}</div>
                   <div className='TableItemPicture'>

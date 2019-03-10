@@ -6,7 +6,7 @@ import Product from './goods';
 import PagesButtons from './PagesButtons';
 import ItemCard from './itemCard';
 
-import "./TableInnerData.css";
+import "./stylesheets/TableInnerData.css";
 
 
 class TableInnerData extends React.Component {
@@ -16,10 +16,9 @@ class TableInnerData extends React.Component {
     
     render() {
         let subcategory = this.props.match.params.subcategory;
-        console.log(subcategory)
+        
         let filteredProducts = this.props.products.filter (el => el.subcategory === subcategory || subcategory === 'all');
-        console.log(filteredProducts)
-        return this.props.dataReady === false 
+        return this.props.dataReady === false && this.props.networkErrorMessage === null
         ?
         <img className='Preloader' src="https://cdn.cssauthor.com/wp-content/uploads/2018/06/Animated-Loading-%C3%97-1.gif" />
         :
@@ -34,6 +33,13 @@ class TableInnerData extends React.Component {
                     goToPageLeft = {this.props.goToPageLeft}
                     goToPageRight = {this.props.goToPageRight}
                 />
+                {
+                    (this.props.filterMode === true && this.props.filteredProducts.length == 0)
+                    ?
+                    <span className='NotFoundMessage'>Not Found</span>
+                    :
+                    null
+                }
                 <div className='TableInnerData'>    
                 {   
                     this.props.filterMode === false && subcategory !== 'all'
@@ -119,6 +125,8 @@ class TableInnerData extends React.Component {
                             arrayIndex= {i}
                         />
                     })
+                     
+                    
 
                     
                 }

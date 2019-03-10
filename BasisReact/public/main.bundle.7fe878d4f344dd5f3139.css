@@ -1,12 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Rubik);* {
-    font-family: 'Rubik', sans-serif;
+@import url(https://fonts.googleapis.com/css?family=Exo|Permanent+Marker|Righteous);* {
+    font-family: 'Exo', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-/* .selected {
-    background: #2f75ec;
-} */
+
 img {
     height: 280px;
 }
@@ -174,10 +172,10 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 15vh;
+    padding-top: 16vh;
     justify-content: space-around;
     text-align: center;
-    background: #fff; 
+    background: #202124; 
     border-left: 1px solid #000;
     border-right: 1px solid #000;
     box-sizing: border-box;
@@ -188,16 +186,22 @@ img {
     border: 0;
     position: absolute;
     right: 15px;
-    top: 14vh;
+    top: 15vh;
     cursor: pointer;
 }
 .ProductCardName {
     font-size: 30px;
     line-height: 50px;
+    color: #acacac;
 }
 .ProductCardPrice {
     padding: 5px 0;
+    color: #acacac;
     font-size: 20px;
+}
+.ProductCardDescription {
+    color: #acacac;
+
 }
 
 .trans-appear {
@@ -272,6 +276,7 @@ img {
     transform: translate(-50%,-50%) scale(0.8);
 }
 .TableAndPagination {
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -292,6 +297,12 @@ img {
 .fade-appear.fade-appear-active {
     opacity: 1;
     transition: 1s;
+}
+.NotFoundMessage {
+    position: absolute;
+    top: 50%;
+    font-size: 26px;
+    transform: translateY(-50%)    
 }
 
 @media only screen 
@@ -323,7 +334,7 @@ img {
     border-radius: 5px;
 }
 .Cart-Text {
-    color: #000;
+    color: #fff;
     margin-right: 4px;
     text-transform: uppercase;
     position: relative;
@@ -350,8 +361,8 @@ img {
     flex-direction: column;
     top: 12vh;
     right: 0;
-    background: lightskyblue;
-    color: #000;
+    background: #202124;
+    color: #acacac;
     width: 900px;
     padding: 10px;
     z-index: 100;
@@ -361,7 +372,7 @@ img {
     flex-wrap: wrap;
 }
 .CleanTheCart {
-    background: palevioletred;
+    background: coral;
     border: 0;
     padding: 2px;
     border-radius: 5px; 
@@ -381,6 +392,7 @@ img {
     }
     .Cart__Container {
         top: 8vh;
+        right: -10vw;
         width: 80vw;
     }
 }.Cart-Item {
@@ -390,7 +402,8 @@ img {
     width: 32.5%;
     padding: 4px;
     margin: 2px;
-    border: 2px solid #000;
+    border: 2px solid #fff;
+    color: #fff
 }
 .Cart-Item__Picture {
     height: 60px;
@@ -409,12 +422,12 @@ img {
     height: 20px;
     width: 20px;
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 .Counter__Button_Dec:disabled {
@@ -425,12 +438,12 @@ img {
     height: 20px;
     width: 20px;
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 
@@ -451,7 +464,7 @@ img {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: 5px 0;
+    padding: 10px 0;
 }
 .App-Nav-Ul {
     display: flex;
@@ -459,7 +472,7 @@ img {
     padding: 5px 0;
 }
 .App-Nav-Li {
-    color: #000;
+    color: #acacac;
     margin-right: 20px;
     font-weight: 100;
 }
@@ -478,7 +491,7 @@ img {
     display: flex;
     flex-direction: column;
     position: relative;
-    background: lightcyan;
+    background: #202124;
     position: fixed;
     z-index: 100;
 }
@@ -500,13 +513,13 @@ img {
     cursor: pointer;
 }
 .Categories-Selected {
-    background: lightcoral;
+    background: coral;
 }
 .Categories-Main-Container {
     position: absolute;
     left: 10%;
     top: 18vh;
-    background: lightskyblue;
+    background: #202124;
     padding: 20px;
     list-style: none;
     z-index: 10;
@@ -520,35 +533,38 @@ img {
     flex-direction: column;
     align-items: center;
     list-style: none;
-    color: #000;
+    color: #acacac;
 }
 .Category-Title {
     line-height: 26px;
-    font-weight: bold;
-    color: gray;
+    color: #fff;
     text-align: center;
 }
 
 .Categories-List-Item {
     padding: 6px 0;
-    color: #000;
+    color: #acacac;
     cursor: pointer;
     font-size: 12px;
     transition: 0.5s;
     cursor: pointer;
+    font-weight: 100;
 }
 .Categories-List-Item:hover {
     transform: scale(1.1);
-    transition: 0.5s;
+    color: #fff;
+    transition: 0.3s;
 }
 
 .Categories-List-Item-Blocked {
     padding: 10px 0;
-    color: #888;
+    color: #fff;
     cursor: pointer;
+    font-weight: 100;
+    font-size: 14px;
 }
 .Header-Container__Categories:hover {
-    background: lightcoral;
+    background: coral;
     transition: 0.3s;
 }
 .Categories-Buttons {
@@ -635,12 +651,12 @@ img {
     margin-right: 16px;
     padding: 5px;
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid #2f75ec;
     border-radius: 5px;
-    color: #000;
+    color: #2f75ec;
 }
 .Search-Bar-Showed::placeholder {
-    color: #000;
+    color: #2f75ec;
 }
 .Search-Button {
     height: 20px;width: 20px;
@@ -655,7 +671,7 @@ img {
     height: 14px;width: 14px;
     position: absolute;
     top: 0;right: 0;
-    border: 2px solid #000;
+    border: 2px solid #2f75ec;
     transition: 0.4s;
     border-radius: 50%;
 }
@@ -663,7 +679,7 @@ img {
     height: 2px;width: 14px;
     position: absolute;
     left: 0;bottom: 0;
-    background: #000;
+    background: #2f75ec;
     transition: 0.4s;
     transform: rotate(-45deg) translateY(-4px);
 }
@@ -672,21 +688,29 @@ img {
     position: absolute;
     left: 0;top: 0;
     transition: 0.4s;
-    background: #000;
+    background: red;
     transform:translateX(-2px) translateY(9px) rotate(45deg);
 }
 .Search-Button-Cross-2 {
     height: 2px;width: 24px;
     position: absolute;
     left: 0;top: 0;
-    background: #000;
+    background: red;
     transition: 0.4s;
     transform: translateX(-2px) translateY(9px) rotate(-45deg);
 }
-.Header-Container__Market-Title {
+.Title-Logo-And-Text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-grow: 6;
+}
+.React-Logo {
+    height: 32px;
+}
+.Header-Container__Market-Title {
     transition: 0.5s;
-    color: #000;
+    color: #fff;
     text-align: center;
 }
 .App-Nav-Li-Selected {
@@ -706,8 +730,7 @@ img {
     .Header-Container {
         min-height: 12vh;
     }
-    .Header-Container__Market-Title {
-        font-size: 26px;
+    .Title-Logo-And-Text {
         display: none;
     }
     .Header-Container__Categories {
@@ -803,12 +826,12 @@ img {
 }
 .HomePage__Title {
     font-size: 60px;
-    color: lightblue;
+    color: #2f75fd;
 
 }
 .HomePage__Subtitle {
     font-size: 30px;
-    color: lightgray;
+    color: gray;
 
 }
 .HomePage__GetStarted {
@@ -832,12 +855,12 @@ img {
   and (orientation: portrait) {
     .HomePage__Title {
         font-size: 40px;
-        color: lightblue;
+        color: #2f75ec;
     
     }
     .HomePage__Subtitle {
         font-size: 20px;
-        color: lightgray;
+        color: gray;
     
     }
 }.About-Container {
@@ -858,112 +881,5 @@ img {
 }
 .PHT-Logo {
     height: 150px;
-}.Modal-Form-Container {
-    position: absolute;
-    z-index: 100;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-150px) translateY(-150px);
-    height: 210px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #202124;
-
 }
-.Form-Title {
-    color: #fff;
-    line-height: 40px;
-}
-.Close-Modal-Form-Container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: 20px;
-    width: 20px;
-}
-.Buy-Form-Labels {
-    position: absolute;
-    top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.Buy-Label {
-    color: #fff;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-}
-.Buy-Input {
-    background: transparent;
-    border: 2px solid #fff;
-    border-radius: 5px;
-    padding: 2px; 
-}
-.Submit-Data {
-    margin: 5px;
-}.Footer-Container {
-    height: 10vh;
-    width: 100%;
-    background: #202124;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}.NewGoodFormContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    
-}
-.NewGoodForm {
-    padding: 20px;
-    background: linear-gradient(30deg, darkseagreen, darkcyan);
-    box-shadow: 0 0 1000px 1000px rgba(0,0,0,0.5);
-    border: 2px solid #000;
-    
-}
-.FormFieldNameMessage {
-    color: red;
-}
-.nameFieldValue {
-    padding: 5px;
-    font-size: 18px;
-    border: 2px solid #000;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-.priceFieldValue {
-    padding: 5px;
-    font-size: 18px;
-    border: 2px solid #000;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-.urlFieldValue {
-    padding: 5px;
-    font-size: 18px;
-    border: 2px solid #000;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-.leftFieldValue {
-    padding: 5px;
-    font-size: 18px;
-    border: 2px solid #000;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-.FormField {
-    display: flex;
-    align-items: center;
-}
-/*# sourceMappingURL=main.bundle.bca8300c4540c0837bc9.css.map*/
+/*# sourceMappingURL=main.bundle.7fe878d4f344dd5f3139.css.map*/

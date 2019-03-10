@@ -1,5 +1,5 @@
 import React from 'react';
-import './itemCard.css';
+import './stylesheets/itemCard.css';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 
 

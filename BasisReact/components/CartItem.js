@@ -1,6 +1,6 @@
 import React from 'react'
 
-import "./CartItem.css"
+import "./stylesheets/CartItem.css"
 
 class CartItem extends React.Component {
     state = {

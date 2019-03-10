@@ -2,7 +2,7 @@ import React from 'react';
 import isoFetch from 'isomorphic-fetch';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-import './ishop.css';
+import './stylesheets/ishop.css';
 
 import TableInnerData from './TableInnerData';
 import Header from './Header';
@@ -10,13 +10,8 @@ import HeaderHome from './HeaderHome';
 import HeaderAbout from './HeaderAbout';
 import HomePage from './HomePage';
 import About from './About';
-import BuyModeForm from './BuyModeForm';
 import CardOfSelectedGood from './CardOfSelectedGood';
-import Footer from './Footer';
 
-import Product from './goods';
-import Card from './itemCard';
-import Form from './newGood';
 
 class IShop extends React.Component {
     state = {
@@ -29,15 +24,14 @@ class IShop extends React.Component {
         markedItem: null,
         dataReady: false,
         categoriesOpened: false,
-        cart: [],
+        cart: JSON.parse(localStorage.getItem('cart')) || [],
         cartPrice: 0,
         cartOpened: false,
         buyMode: false,
-        
     };
 
     fetchError = (errorMessage) => {
-        console.log(errorMessage);
+        console.log(errorMessage)
       };
     
     fetchSuccess = (loadedData) => {
@@ -52,7 +46,7 @@ class IShop extends React.Component {
     };
 
     componentWillMount = () => {
-        isoFetch("http://localhost:3000/array", {
+        isoFetch("https://server-7146f.firebaseio.com/array.json", {
             method: 'get',
             headers: {
                 "Content-Type": "application/json",
@@ -63,7 +57,7 @@ class IShop extends React.Component {
             if (!response.ok) {
                 let Err=new Error("fetch error " + response.status);
                 Err.userMessage="Ошибка связи";
-                throw Err; 
+                throw Err;
             }
             else
                 return response.json(); 
@@ -78,8 +72,8 @@ class IShop extends React.Component {
         })
         .catch( (error) => {
             this.fetchError(error.userMessage||error.message);
+            alert("The app can't connect to the server. Try to launch JSON-server and reload the page")
         })
-
     }
     
     markItem = (id) => {
@@ -164,6 +158,7 @@ class IShop extends React.Component {
             filteredProducts: prodArrFiltered,
             markedItem: null,
             categoriesOpened: false,
+            cartOpened: false
         });
         if (value === "") {
             this.setState({
@@ -178,6 +173,8 @@ class IShop extends React.Component {
         this.setState({
             markedItem: null,
             searchBarState: true,
+            cartOpened: false,
+            categoriesOpened: false
         })
     }
     closeSearchBar = () => {
@@ -185,6 +182,8 @@ class IShop extends React.Component {
         this.setState({
             markedItem: null,
             searchBarState: false,
+            cartOpened: false,
+            categoriesOpened: false
         });
     }
 
@@ -206,11 +205,15 @@ class IShop extends React.Component {
             alert('You have already added this good to cart!');
             return;
         } 
-        else this.state.buyMode === false && 
+        
+        else {
+            localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct])); 
             this.setState({
                 cart: [...this.state.cart, selectedProduct],
                 markedItem: null,
             })
+        } 
+            
         
     };
 
@@ -238,10 +241,12 @@ class IShop extends React.Component {
     }
 
     cleanCart = () => {
+        localStorage.setItem('cart', JSON.stringify([]))
         this.state.buyMode === false &&
         this.setState({
             cart: [],
             markedItem: null,
+            cartOpened: false
         })
     }
 
@@ -253,16 +258,6 @@ class IShop extends React.Component {
     }
     render() {        
         return <div className='App'>
-                    {/* {
-                        this.state.buyMode === true 
-                        ?
-                        <BuyModeForm
-                            buyModeOff = {this.buyModeOff}
-                            submitData = {this.submitData}
-                        />
-                        :
-                        null
-                    } */}
                     <Route 
                         path={`/goods/:subcategory`} 
                         render={(props)=><Header
@@ -324,7 +319,6 @@ class IShop extends React.Component {
                         <div className='AppContainer'>
                             <div className='ProductsListAndButton'>
                                 <div className='ProductsList'>
-                                        
                                         <Route 
                                             path={`/goods/:subcategory`} 
                                             render={(props)=><TableInnerData  
@@ -336,6 +330,7 @@ class IShop extends React.Component {
                                                 filterCriterion = {this.state.filterCriterion}
                                                 switchFilterCategoriesMode = {this.switchFilterCategoriesMode}
                                                 refreshFilteredProducts = {this.refreshFilteredProducts}
+                                                networkErrorMessage = {this.state.networkErrorMessage}
                                                 markItem = {this.markItem}
                                                 prodAddToCart = {this.prodAddToCart}
                                                 selected = {this.state.markedItem}
@@ -347,8 +342,7 @@ class IShop extends React.Component {
                                                 {...props}
                                                 />
                                             }
-                                        /> 
-                                    
+                                        />
                                 </div>
                             </div>
 

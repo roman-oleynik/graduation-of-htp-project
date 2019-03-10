@@ -3,7 +3,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
 import Cart from './Cart';
 
-import './Header.css';
+import './stylesheets/Header.css';
 
 class Header extends React.Component {
     
@@ -75,7 +75,7 @@ class Header extends React.Component {
                                 <NavLink to={'/goods/Coats'}><li id="Coats" className={`Categories-List-Item${subcategory === "Coats" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Coats</li></NavLink>
                                 <NavLink to={'/goods/Jackets'}><li id="Jackets" className={`Categories-List-Item${subcategory === "Jackets" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Jackets</li></NavLink>
                                 <NavLink to={'/goods/Cloaks'}><li id="Cloaks" className={`Categories-List-Item${subcategory === "Cloaks" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Cloaks</li></NavLink>
-                                <NavLink to={'/goods/Winter-Jackets'}><li id="Winter-Jackets" className={`Categories-List-Item${subcategory === "Winter-jackets" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Winter Jackets</li></NavLink>
+                                <NavLink to={'/goods/Winter-Jackets'}><li id="Winter-Jackets" className={`Categories-List-Item${subcategory === "Winter-Jackets" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Winter Jackets</li></NavLink>
                                 <NavLink to={'/goods/Windbreakers'}><li id="Windbreakers" className={`Categories-List-Item${subcategory === "Windbreakers" ? "-Blocked" : ""}`} onClick={this.filterByCategory}>Windbreakers</li></NavLink>
                             </ul>
                             <ul className='Categories-List Categories-List-Outerwear'>
@@ -88,7 +88,11 @@ class Header extends React.Component {
                         </div>
                         
                     }
-                <h1 className='Header-Container__Market-Title'>MyShop</h1>
+                    <div className='Title-Logo-And-Text'>
+                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png' className='React-Logo' />
+                        <h1 className='Header-Container__Market-Title'>Myhope</h1>
+                    </div>
+                    
                 {
                     subcategory==='all' &&
                     <div className='Header-Container__Search-Button-Container'>

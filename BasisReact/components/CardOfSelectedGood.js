@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CardOfSelectedGood.css';
+import './stylesheets/CardOfSelectedGood.css';
 
 class CardOfSelectedGood extends React.Component {
     render() {

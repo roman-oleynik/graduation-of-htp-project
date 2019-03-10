@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: 5px 0;
+    padding: 10px 0;
 }
 .App-Nav-Ul {
     display: flex;
@@ -14,7 +14,7 @@
     padding: 5px 0;
 }
 .App-Nav-Li {
-    color: #000;
+    color: #acacac;
     margin-right: 20px;
     font-weight: 100;
 }
@@ -33,7 +33,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    background: lightcyan;
+    background: #202124;
     position: fixed;
     z-index: 100;
 }
@@ -55,13 +55,13 @@
     cursor: pointer;
 }
 .Categories-Selected {
-    background: lightcoral;
+    background: coral;
 }
 .Categories-Main-Container {
     position: absolute;
     left: 10%;
     top: 18vh;
-    background: lightskyblue;
+    background: #202124;
     padding: 20px;
     list-style: none;
     z-index: 10;
@@ -75,35 +75,38 @@
     flex-direction: column;
     align-items: center;
     list-style: none;
-    color: #000;
+    color: #acacac;
 }
 .Category-Title {
     line-height: 26px;
-    font-weight: bold;
-    color: gray;
+    color: #fff;
     text-align: center;
 }
 
 .Categories-List-Item {
     padding: 6px 0;
-    color: #000;
+    color: #acacac;
     cursor: pointer;
     font-size: 12px;
     transition: 0.5s;
     cursor: pointer;
+    font-weight: 100;
 }
 .Categories-List-Item:hover {
     transform: scale(1.1);
-    transition: 0.5s;
+    color: #fff;
+    transition: 0.3s;
 }
 
 .Categories-List-Item-Blocked {
     padding: 10px 0;
-    color: #888;
+    color: #fff;
     cursor: pointer;
+    font-weight: 100;
+    font-size: 14px;
 }
 .Header-Container__Categories:hover {
-    background: lightcoral;
+    background: coral;
     transition: 0.3s;
 }
 .Categories-Buttons {
@@ -190,12 +193,12 @@
     margin-right: 16px;
     padding: 5px;
     background: transparent;
-    border: 2px solid #000;
+    border: 2px solid #2f75ec;
     border-radius: 5px;
-    color: #000;
+    color: #2f75ec;
 }
 .Search-Bar-Showed::placeholder {
-    color: #000;
+    color: #2f75ec;
 }
 .Search-Button {
     height: 20px;width: 20px;
@@ -210,7 +213,7 @@
     height: 14px;width: 14px;
     position: absolute;
     top: 0;right: 0;
-    border: 2px solid #000;
+    border: 2px solid #2f75ec;
     transition: 0.4s;
     border-radius: 50%;
 }
@@ -218,7 +221,7 @@
     height: 2px;width: 14px;
     position: absolute;
     left: 0;bottom: 0;
-    background: #000;
+    background: #2f75ec;
     transition: 0.4s;
     transform: rotate(-45deg) translateY(-4px);
 }
@@ -227,21 +230,29 @@
     position: absolute;
     left: 0;top: 0;
     transition: 0.4s;
-    background: #000;
+    background: red;
     transform:translateX(-2px) translateY(9px) rotate(45deg);
 }
 .Search-Button-Cross-2 {
     height: 2px;width: 24px;
     position: absolute;
     left: 0;top: 0;
-    background: #000;
+    background: red;
     transition: 0.4s;
     transform: translateX(-2px) translateY(9px) rotate(-45deg);
 }
-.Header-Container__Market-Title {
+.Title-Logo-And-Text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-grow: 6;
+}
+.React-Logo {
+    height: 32px;
+}
+.Header-Container__Market-Title {
     transition: 0.5s;
-    color: #000;
+    color: #fff;
     text-align: center;
 }
 .App-Nav-Li-Selected {
@@ -261,8 +272,7 @@
     .Header-Container {
         min-height: 12vh;
     }
-    .Header-Container__Market-Title {
-        font-size: 26px;
+    .Title-Logo-And-Text {
         display: none;
     }
     .Header-Container__Categories {

@@ -3,7 +3,7 @@ import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
 import Cart from './Cart';
 
-import './HeaderHome.css';
+import './stylesheets/HeaderHome.css';
 
 class HeaderHome extends React.Component {
     changeSPAMode = (EO) => {
